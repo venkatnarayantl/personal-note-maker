@@ -14,6 +14,7 @@ router.put('/:id',(req,res)=>{
     res.status(200).json({message:"Note updated successfully"});
 })
 
+
 router.delete('/:id',(req,res)=>{
     res.status(200).json({message:"Note deleted successfully"});
 })
