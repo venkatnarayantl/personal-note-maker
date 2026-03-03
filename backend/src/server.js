@@ -10,8 +10,8 @@ const app = express();
 connectDB()
 const port = process.env.PORT || 5001
 
-
-
+//middleware
+app.use(express.json());
 //endpoint -> url+http method 
 app.use("/api/notes",notesRoutes);
 
