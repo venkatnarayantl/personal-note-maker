@@ -1,19 +1,29 @@
 import mongoose from "mongoose";
 
-//1. create a schema 
-//2. model based on that schema
-
-const noteSchema = new mongoose.Schema({
-    title: {
-        type: "String",
-        required : true
+const noteSchema = new mongoose.Schema(
+  {
+    // ADD userId to link each note to the user who created it
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
-    content:{
-        type: "String",
-        required:true
-    }
-},{timestamps:true})
+    title: {
+      type: String,
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
-const Note = mongoose.model("Note",noteSchema)
+export default mongoose.model("Note", noteSchema);
 
-export default Note
+// ─────────────────────────────────────────────────────────────────────────────
+// NOTE: If your current note schema has different field names (e.g. "body"
+// instead of "content"), keep your original field names and just ADD the
+// userId field. Only the userId line is new here.
+// ─────────────────────────────────────────────────────────────────────────────

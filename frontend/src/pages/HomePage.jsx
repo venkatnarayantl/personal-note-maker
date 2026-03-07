@@ -8,7 +8,7 @@ import NotesNotFound from '../components/NotesNotFound';
 
 
 
-function HomePage() {
+function HomePage({ user, onLogout }) {
   const [isRateLimited, setIsRateLimited] = React.useState(false);
   const [notes, setNotes] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -17,7 +17,6 @@ function HomePage() {
     const fetchNotes = async() =>{
       try{
         const res = await api.get("/notes")
-        console.log(res.data);
         setNotes(res.data)
         setIsRateLimited(false)
 
@@ -42,7 +41,7 @@ function HomePage() {
 
   return (
     <div className='min-h-screen'>
-      <Navbar />
+      <Navbar onLogout={onLogout} user={user} />
       {isRateLimited && <RateLimitedUI/>}
 
       <div className='max-w-7xl mx-auto p-4 mt-6'>
