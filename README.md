@@ -4,7 +4,7 @@ Create Notes: Quick entry for new ideas or tasks.
 Edit Notes: Update existing content on the fly.
 Delete Notes: Remove completed or unwanted notes.
 Responsive Design: Fully functional on mobile and desktop devices.
-Persistent Storage: (Optional: Mention if you use LocalStorage, MongoDB, etc.)
+Persistent Storage: Mongodb
 
 🛠️ Tech Stack
 Frontend: HTML, CSS, JavaScript (React)
