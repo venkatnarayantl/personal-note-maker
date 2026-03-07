@@ -32,9 +32,14 @@ const NoteCard = ({note, setNotes}) =>{
         <p className="text-base-content/70 line-clamp-3">{note.content}</p>
         <div className="card-actions justify-between items-center mt-4">
           <span className="text-sm text-base-content/60">
-            {formatDate(new Date(note.createdAt))}
+            Created: {formatDate(new Date(note.createdAt))}
           </span>
-          <div className="flex items-center gap-1">
+          {note.updatedAt !== note.createdAt && (
+            <span className="text-sm text-base-content/60">
+              Edited: {formatDate(new Date(note.updatedAt))}
+            </span>
+          )}
+            <div className="flex items-center gap-1">
             <PenSquareIcon className="size-4" />
             <button
               className="btn btn-ghost btn-xs text-error" onClick={(e)=> handleDelete(e, note._id)}

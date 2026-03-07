@@ -120,15 +120,28 @@ router.post("/login", async (req, res) => {
 });
 
 // ─── LOGOUT ───────────────────────────────────────────────────────────────────
-router.post("/logout", (req, res) => {
+// LOGOUT — increment tokenVersion to invalidate all tokens
+router.post("/logout", async (req, res) => {
+  const token = req.cookies.token;
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      await User.findByIdAndUpdate(decoded.id, { $inc: { tokenVersion: 1 } });
+    } catch {}
+  }
   res.clearCookie("token");
   res.json({ message: "Logged out successfully" });
 });
 
+
 // ─── GET CURRENT USER ─────────────────────────────────────────────────────────
 // Frontend calls this on every page load to check if user is logged in
 router.get("/me", async (req, res) => {
-  const token = req.cookies.token;
+  const token = jwt.sign(
+  { id: user._id, tokenVersion: user.tokenVersion },
+  process.env.JWT_SECRET,
+  { expiresIn: "7d" }
+);
   if (!token) return res.status(401).json({ message: "Not logged in" });
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
