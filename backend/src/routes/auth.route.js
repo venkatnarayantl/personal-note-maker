@@ -2,7 +2,8 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import nodemailer from "nodemailer";
+// import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import User from "../models/user.model.js";
 
 const router = express.Router();
@@ -39,8 +40,8 @@ router.post("/register", async (req, res) => {
     // Same service on Render so APP_URL = the one Render URL
     const verifyLink = `${process.env.APP_URL}/api/auth/verify/${verificationToken}`;
 
-    await getTransporter().sendMail({
-  from: `"Note Maker" <${process.env.EMAIL_USER}>`,
+   const result = await new Resend(process.env.RESEND_API_KEY).emails.send({
+  from: "Note Maker <onboarding@resend.dev>",
   to: email,
   subject: "Verify your Note Maker account",
   html: `
@@ -56,9 +57,10 @@ router.post("/register", async (req, res) => {
     </div>
         `,
     });
-    console.log("Email sent successfully");
-    console.log("EMAIL USER:", process.env.EMAIL_USER);
-    console.log("EMAIL PASS:", process.env.EMAIL_PASS);
+    // console.log("Email sent successfully");
+    // console.log("EMAIL USER:", process.env.EMAIL_USER);
+    // console.log("EMAIL PASS:", process.env.EMAIL_PASS);
+    console.log("Resend result:", JSON.stringify(result));
 
     res.json({ message: "Registered! Check your email to verify your account." });
   } catch (err) {

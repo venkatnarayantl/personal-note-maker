@@ -23,6 +23,7 @@
     "mongoose": "^9.2.3",
     "nodemailer": "^8.0.1",
     "nodemon": "^3.1.14",
-    "personal-note-maker": "file:.."
+    "personal-note-maker": "file:..",
+    "resend": "^6.9.3"
   }
 }
