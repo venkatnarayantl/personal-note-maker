@@ -4,8 +4,8 @@
   "description": "A simple and efficient web application to manage your daily tasks and thoughts. Users can easily create, view, edit, and delete notes. \r Features: \r Create Notes: Quick entry for new ideas or tasks.\r Edit Notes: Update existing content on the fly.\r Delete Notes: Remove completed or unwanted notes.\r Responsive Design: Fully functional on mobile and desktop devices.\r Persistent Storage: (Optional: Mention if you use LocalStorage, MongoDB, etc.)",
   "main": "index.js",
   "scripts": {
-    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "npm run start --prefix backend"
+   "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "node backend/src/server.js"
   },
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/venkatnarayantl/personal-note-maker/issues"
   },
